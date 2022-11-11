@@ -16,12 +16,10 @@
       src="https://kit.fontawesome.com/499fa10131.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <title>Weather Application</title>
   </head>
   <body>
-    <span class="icon">
-      <i class="fa-solid fa-arrow-right"></i>
-    </span>
     <div class="App">
       <div class="container">
         <div class="Weather">
@@ -46,12 +44,16 @@
           <div class="WeatherInfo">
             <div class="row">
               <div class="col-6">
-                <h1>San Francisco</h1>
+                <h1 id="city"></h1>
                 <ul>
-                  <li><span>Wednesday 16:01</span>, scattered clouds</li>
                   <li>
-                    Humidity: <strong>88%</strong>, Wind:
-                    <strong>2.57km/h</strong>
+                    <span>Wednesday 16:01</span>,
+                    <span id="sky"></span>
+                  </li>
+                  <li>
+                    Humidity: <strong id="humidity">19</strong
+                    ><strong>%</strong>, Wind: <strong id="wind"></strong
+                    ><strong> km/h</strong>
                   </li>
                 </ul>
               </div>
@@ -59,8 +61,8 @@
                 <div class="temperature-container d-flex justify-content-end">
                   <canvas width="52" height="52"></canvas>
                   <div>
-                    <span class="temperature">8</span
-                    ><span class="unit">°C</span>
+                    <span class="temperature"></span
+                    ><span class="unit">°C|F</span>
                   </div>
                 </div>
               </div>
@@ -138,5 +140,6 @@
         </div>
       </div>
     </div>
+    <script src="src/app.js"></script>
   </body>
 </html>
