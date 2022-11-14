@@ -24,6 +24,10 @@ function formatData(timestamp) {
 }
 
 function displayTemperature(response) {
+  console.log(response.data);
+  let iconElement = document.querySelector("#main-icon");
+  iconElement.setAttribute("src", response.data.condition.icon_url);
+  iconElement.setAttribute("alt", response.data.condition.description);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.city;
   let skyElement = document.querySelector("#sky");
