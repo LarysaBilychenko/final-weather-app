@@ -24,7 +24,6 @@ function formatData(timestamp) {
 }
 
 function displayTemperature(response) {
-  console.log(response.data);
   let iconElement = document.querySelector("#main-icon");
   iconElement.setAttribute("src", response.data.condition.icon_url);
   iconElement.setAttribute("alt", response.data.condition.description);
@@ -42,4 +41,17 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
 }
 
-axios.get(apiUrl).then(displayTemperature);
+function search(city) {
+  let apiKey = "3af0ace7e53bde08dtbd8a6b4o60a6d7";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let inputCityElement = document.querySelector("#input-city");
+  search(inputCityElement.value);
+}
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
