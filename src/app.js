@@ -1,5 +1,3 @@
-let apiKey = "3af0ace7e53bde08dtbd8a6b4o60a6d7";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Kyiv&key=${apiKey}&units=metric`;
 function formatData(timestamp) {
   let date = new Date(timestamp);
   let days = [
@@ -23,6 +21,12 @@ function formatData(timestamp) {
   return `${day}, ${hours}:${minutes}`;
 }
 
+function getForecast(city) {
+  let apiKey = "3af0ace7e53bde08dtbd8a6b4o60a6d7";
+  let apiUrlForecast = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrlForecast).then(displayForecast);
+}
+
 function displayTemperature(response) {
   celsiusTemperature = response.data.temperature.current;
   let iconElement = document.querySelector("#main-icon");
@@ -40,6 +44,7 @@ function displayTemperature(response) {
   currentTimeElement.innerHTML = formatData(response.data.time * 1000);
   let temperatureElement = document.querySelector(".temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  getForecast(response.data.city);
 }
 
 function search(city) {
@@ -76,7 +81,8 @@ function displayCelsius(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
@@ -85,7 +91,7 @@ function displayForecast() {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
-        <div class="forecast-time">Wed</div>
+        <div class="forecast-time">${day}</div>
         <img src="" alt="" id="main-icon" />
           <div class="forecast-temperature">
            <span class="forecast-temperature-max">13°</span
@@ -99,9 +105,8 @@ function displayForecast() {
 }
 
 search("Kyiv");
-displayForecast();
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheit);
 
 let celsiusLink = document.querySelector("celsius-link");
-celsiusLink.addEventListener("click", displayCelsius);
+//celsiusLink.addEventListener("click", displayCelsius);
