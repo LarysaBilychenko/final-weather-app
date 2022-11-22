@@ -64,15 +64,6 @@ searchForm.addEventListener("submit", handleSubmit);
 
 let celsiusTemperature = null;
 
-function displayFahrenheit(event) {
-  event.preventDefault();
-  //celsiusLink.classList.remove("active");
-  //fahrenheitLink.classList.add("active");
-  let temperatureElement = document.querySelector(".temperature");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
 function displayCelsius(event) {
   event.preventDefault();
   //celsiusLink.classList.add("active");
@@ -119,8 +110,3 @@ function displayForecast(response) {
 }
 
 search("Kyiv");
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheit);
-
-let celsiusLink = document.querySelector("celsius-link");
-//celsiusLink.addEventListener("click", displayCelsius);
